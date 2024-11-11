@@ -1,0 +1,55 @@
+.header{
+    padding: 0;
+    &__nav{    
+        background-color: #E3E3E3;
+        padding: 0 5%;
+        position: relative;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Sombra hacia abajo */
+        &__logo{
+            width: 15em;
+            height: auto;
+        }
+        &__dropdown{
+            position: absolute;
+            right: .6em;
+            top: .4em;
+            border: none;
+            background: transparent;
+            font-family: "Readex Pro", sans-serif;
+            color: #1763A0;
+            cursor: pointer;
+            font-size: 2.1rem;
+        }
+    }
+    &__search-container{
+        font-family: "Roboto Serif", serif;
+        color: #1763A0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 2em;
+        &__title{
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            width: 90%;
+            margin: 1.5em auto;
+        }
+        &__textfield{
+            background-color: #E3E3E3;
+            width: 70%;
+        }
+        &__select{
+            background-color: #E3E3E3;
+            width: 70%;
+        }
+        &__subtitle{
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-top: 1.5em;
+            align-self: flex-start;
+        }
+    }
+    @media only screen and (min-width: 1000px) {
+    }
+}
