@@ -1,0 +1,21 @@
+.footer{
+    background-color: #E3E3E3;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    //quitar mas tarde
+    position: absolute;
+    bottom: 0;
+    padding: 1.5em;
+    width: 100%;
+    &__logo{
+        width: 30%;
+        max-width: 13em;
+        display: inline-block;
+    }
+    &__text{
+        font-size: .9rem;
+        margin-top: 0.5em;
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+    }
+}
