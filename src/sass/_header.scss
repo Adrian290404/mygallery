@@ -2,7 +2,7 @@
     padding: 0;
     &__nav{    
         background-color: #E3E3E3;
-        padding: 0 5%;
+        padding: 1em 2em;
         position: relative;
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Sombra hacia abajo */
         &__logo{
@@ -12,13 +12,21 @@
         &__dropdown{
             position: absolute;
             right: .6em;
-            top: .4em;
+            top: .8em;
             border: none;
             background: transparent;
             font-family: "Readex Pro", sans-serif;
             color: #1763A0;
             cursor: pointer;
             font-size: 2.1rem;
+        }
+        &__menu{
+            display: none;
+            color: #1763A0;
+            font-size: 1.3rem;
+            font-weight: 500;
+            list-style: none;
+            margin-left: 3.2em;
         }
     }
     &__search-container{
@@ -34,6 +42,7 @@
             font-size: 1.5rem;
             width: 90%;
             margin: 1.5em auto;
+            margin-bottom: .8em;
         }
         &__textfield{
             background-color: #E3E3E3;
@@ -45,11 +54,55 @@
         }
         &__subtitle{
             font-size: 1.125rem;
-            font-weight: 500;
+            font-weight: 400;
             margin-top: 1.5em;
             align-self: flex-start;
         }
     }
     @media only screen and (min-width: 1000px) {
+        &__nav{
+            display: flex;
+            justify-content: space-between;  
+            align-items: center;
+            &__dropdown{
+                display: none;
+            }
+            &__menu{
+                display: flex;
+                gap: 3em;                
+                &__item{
+                    cursor: pointer;
+                }
+            }
+        }
+        &__search-container{
+            &__title{
+                font-size: 2rem;
+            }
+            &__textfield{
+                width: 60%;
+            }
+            &__select{
+                width: 60%;
+            }
+            &__subtitle{
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
+.thisPage{
+    color: #1D95F6;
+    font-weight: 900;
+}
+.hidden {
+    display: none;
+}
+.visible {
+    display: block;
+}
+@media only screen and (min-width: 1000px) {
+    .visible {
+        display: flex;
     }
 }
