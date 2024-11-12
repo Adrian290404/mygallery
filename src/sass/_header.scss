@@ -27,6 +27,9 @@
             font-weight: 500;
             list-style: none;
             margin-left: 3.2em;
+            &__item{
+                cursor: pointer;
+            }
         }
     }
     &__search-container{
@@ -70,9 +73,6 @@
             &__menu{
                 display: flex;
                 gap: 3em;                
-                &__item{
-                    cursor: pointer;
-                }
             }
         }
         &__search-container{

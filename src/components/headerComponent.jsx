@@ -5,12 +5,17 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 export const HeaderComponent = () => {
     const [filter, setFilter] = useState('');
     const [showMenu, setShowMenu] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(true);
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1000);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isSearchPage = location.pathname === "/search";
     const search = ["Find the perfect photo for your project", "Free stock photos"];
     const myPhotos = ["Manage your favorite photos", "Saved photos"];
 
@@ -26,6 +31,10 @@ export const HeaderComponent = () => {
     const hideMenuHandler = () => {
         setShowMenu(false); 
         setShowDropdown(true);
+    };
+
+    const handleNavigation = (path) => {
+        navigate(path);
     };
 
     useEffect(() => {
@@ -50,12 +59,12 @@ export const HeaderComponent = () => {
                     </>
                 )}
                 <ul className={`header__nav__menu ${isLargeScreen || showMenu ? "visible" : "hidden"}`}>
-                    <li className="header__nav__menu__item thisPage">Search</li>
-                    <li className="header__nav__menu__item">My photos</li>
+                <li className={`header__nav__menu__item ${isSearchPage ? "thisPage" : ""}`} onClick={() => handleNavigation("/search")}>Search</li>
+                <li className={`header__nav__menu__item ${!isSearchPage ? "thisPage" : ""}`} onClick={() => handleNavigation("/my-photos")}>My photos</li>
                 </ul>
             </nav>
             <div className="header__search-container">
-                <h2 className="header__search-container__title">{search[0]}</h2>
+                <h2 className="header__search-container__title">{isSearchPage ? search[0] : myPhotos[0]}</h2>
                 <TextField className="header__search-container__textfield" id="filled-basic" label="Search photos" variant="filled" />
                 <FormControl className="header__search-container__select" variant="filled" sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="demo-simple-select-filled-label">Filter by</InputLabel>
@@ -72,7 +81,7 @@ export const HeaderComponent = () => {
                         <MenuItem value="likes">Likes</MenuItem>
                     </Select>
                 </FormControl>
-                <h3 className="header__search-container__subtitle">{search[1]}</h3>
+                <h3 className="header__search-container__subtitle">{isSearchPage ? search[1] : myPhotos[1]}</h3>
             </div>
         </header>
     </>
