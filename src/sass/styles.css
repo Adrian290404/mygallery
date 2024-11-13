@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #C2C2C2;
+  min-width: 320px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.header {
+  padding: 0;
+}
+.header__nav {
+  background-color: #E3E3E3;
+  padding: 1em 2em;
+  position: relative;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+.header__nav__logo {
+  width: 15em;
+  height: auto;
+}
+.header__nav__dropdown {
+  position: absolute;
+  right: 0.6em;
+  top: 0.8em;
+  border: none;
+  background: transparent;
+  font-family: "Readex Pro", sans-serif;
+  color: #1763A0;
+  cursor: pointer;
+  font-size: 2.1rem;
+}
+.header__nav__menu {
+  display: none;
+  color: #1763A0;
+  font-size: 1.3rem;
+  font-weight: 500;
+  list-style: none;
+  margin-left: 3.2em;
+}
+.header__nav__menu__item {
+  cursor: pointer;
+}
+.header__search-container {
+  font-family: "Roboto Serif", serif;
+  color: #1763A0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 2em;
+}
+.header__search-container__title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  width: 90%;
+  margin: 1.5em auto;
+  margin-bottom: 0.8em;
+}
+.header__search-container__textfield {
+  background-color: #E3E3E3;
+  width: 70%;
+}
+.header__search-container__select {
+  background-color: #E3E3E3;
+  width: 70%;
+}
+.header__search-container__subtitle {
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin-top: 1.5em;
+  align-self: flex-start;
+}
+@media only screen and (min-width: 1000px) {
+  .header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header__nav__dropdown {
+    display: none;
+  }
+  .header__nav__menu {
+    display: flex;
+    gap: 3em;
+  }
+  .header__search-container__title {
+    font-size: 2rem;
+  }
+  .header__search-container__textfield {
+    width: 60%;
+  }
+  .header__search-container__select {
+    width: 60%;
+  }
+  .header__search-container__subtitle {
+    font-size: 1.4rem;
+  }
+}
+
+.thisPage {
+  color: #1D95F6;
+  font-weight: 900;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+@media only screen and (min-width: 1000px) {
+  .visible {
+    display: flex;
+  }
+}
+.footer {
+  background-color: #E3E3E3;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  padding: 1.5em;
+  width: 100%;
+}
+.footer__logo {
+  width: 30%;
+  max-width: 13em;
+  display: inline-block;
+}
+.footer__text {
+  font-size: 0.9rem;
+  margin-top: 0.5em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}/*# sourceMappingURL=styles.css.map */

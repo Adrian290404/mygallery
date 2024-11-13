@@ -1,11 +1,9 @@
-import React from "react"
-import { HeaderComponent } from "../components/headerComponent"
-import { FooterComponent } from "../components/footerComponent"
+import { LayoutComponent } from "../components/layoutComponent"
 
 export const SearchPage = () => {
-    return<>
-        <HeaderComponent /> 
-        
-        <FooterComponent />
+    return (
+    <>
+        <LayoutComponent />
     </>
+    )
 }

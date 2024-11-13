@@ -1,13 +1,9 @@
-import { FooterComponent } from "../components/footerComponent"
-import { HeaderComponent } from "../components/headerComponent"
-
+import { LayoutComponent } from "../components/layoutComponent"
 
 export const MyPhotosPage = () => {
     return (
     <>
-        <HeaderComponent />
-
-        <FooterComponent />
+        <LayoutComponent />
     </>
     )
 }
