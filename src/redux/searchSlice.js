@@ -23,3 +23,6 @@ export const searchSlice = createSlice({
         })
     }
 })
+
+export const searchData = (state) => state.search.data
+export const searchStatus = (state) => state.search.status

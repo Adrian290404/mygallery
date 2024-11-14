@@ -80,7 +80,7 @@ export const LayoutComponent = () => {
                 </section>
             </header>
 
-            <main>
+            <main className="main">
                 <Outlet />
             </main>
 

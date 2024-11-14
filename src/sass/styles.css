@@ -130,8 +130,6 @@ html, body {
   background-color: #E3E3E3;
   text-align: center;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-  position: absolute;
-  bottom: 0;
   padding: 1.5em;
   width: 100%;
 }
