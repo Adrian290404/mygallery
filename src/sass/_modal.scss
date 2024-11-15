@@ -1,0 +1,65 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #E3E3E3;
+    padding: 2em 0;
+    border-radius: .5em;
+    border: 2px solid rgba(0, 0, 0, 0.397);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 20em;
+    z-index: 1;
+    &__close-button{
+        position: absolute;
+        top: .2em;
+        right: .6em;
+        background: transparent;
+        border: none;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: #888;
+        transition: color 0.3s;
+    }
+    &__close-button:hover {
+        color: #000000;
+    }
+    &__title {
+        font-size: 1.375rem;
+        margin-top: 0.2em;
+        font-family: "Roboto", sans-serif;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: underline;
+        &--edit{
+            margin-bottom: 1em;
+        }
+    }
+    &__text {
+        font-size: 1rem;
+        margin-top: 1em;
+        font-family: "Roboto", sans-serif;
+        line-height: 1.5em;
+        display: block;
+        margin-left: 30%;
+    }
+    &__mui{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__textField{
+            margin: 2em;
+            background-color: white;
+            width: 80%;
+        }  
+        &__separator{
+            margin-top: 1em;
+        }
+        &__button{
+            margin: 2em;
+            width: 80%;
+        }     
+    }
+    
+}

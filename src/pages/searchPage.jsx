@@ -29,23 +29,24 @@ export const SearchPage = () => {
         }
     }, [photoStatus]);
 
+    console.log(photoData);
     return (
-        <section className="main__image-container">
+        <>
             {!isLoading &&
                 photoData.map((photo) => (
-                    <PhotoComponent
-                        key={photo.id}
-                        height={photo.height}
-                        width={photo.width}
-                        id={photo.id}
-                        likes={photo.likes}
-                        publishDate={photo.created_at}
-                        section="home-photo"
-                        imageURL={photo.urls.regular}
-                        fileName={`${photo.slug}.jpg`}
-                        description={photo.description}
-                    />
-                ))}
-        </section>
+                    <section className="main__image-container" key={photo.id}>
+                        <PhotoComponent
+                            height={photo.height}
+                            width={photo.width}
+                            id={photo.id}
+                            likes={photo.likes}
+                            publishDate={photo.created_at}
+                            imageURL={photo.urls.regular}
+                            description={photo.description}
+                        />
+                    </section>
+                ))
+            }
+        </>
     );
 };

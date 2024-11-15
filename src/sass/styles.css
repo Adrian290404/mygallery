@@ -143,4 +143,93 @@ html, body {
   margin-top: 0.5em;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
+}
+
+.main {
+  width: 100%;
+  margin-top: 2em;
+}
+.main__image-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1em 0;
+}
+.main__image-container__photo {
+  width: 100%;
+  height: auto;
+}
+.main__image-container__buttons-container {
+  background-color: white;
+  margin-top: -0.2em;
+  padding: 0.5em;
+}
+.main__image-container__buttons-container__button {
+  width: 30px;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #E3E3E3;
+  padding: 2em 0;
+  border-radius: 0.5em;
+  border: 2px solid rgba(0, 0, 0, 0.397);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 20em;
+  z-index: 1;
+}
+.modal__close-button {
+  position: absolute;
+  top: 0.2em;
+  right: 0.6em;
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s;
+}
+.modal__close-button:hover {
+  color: #000000;
+}
+.modal__title {
+  font-size: 1.375rem;
+  margin-top: 0.2em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: underline;
+}
+.modal__title--edit {
+  margin-bottom: 1em;
+}
+.modal__text {
+  font-size: 1rem;
+  margin-top: 1em;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5em;
+  display: block;
+  margin-left: 30%;
+}
+.modal__mui {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal__mui__textField {
+  margin: 2em;
+  background-color: white;
+  width: 80%;
+}
+.modal__mui__separator {
+  margin-top: 1em;
+}
+.modal__mui__button {
+  margin: 2em;
+  width: 80%;
 }/*# sourceMappingURL=styles.css.map */
