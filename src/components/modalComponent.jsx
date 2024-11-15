@@ -1,6 +1,6 @@
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import EditIcon from '@mui/icons-material/Edit';
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import EditIcon from '@mui/icons-material/Edit'
 
 export const Modal = ({ type, text = "", onClose }) => {
     if (type === "information") {
@@ -18,7 +18,7 @@ export const Modal = ({ type, text = "", onClose }) => {
             <div className="modal">
                 <button className="modal__close-button" onClick={onClose}>x</button>
                 <h1 className="modal__title modal__title--edit">Edit Photo</h1>
-                <div class="modal__mui">
+                <div className="modal__mui">
                     <TextField
                         className = "modal__mui__textField"
                         id="filled-multiline-static"
@@ -34,7 +34,7 @@ export const Modal = ({ type, text = "", onClose }) => {
                     </Button>
                 </div>
             </div>
-        );
+        )
     }
-    return null;
-};
+    return null
+}

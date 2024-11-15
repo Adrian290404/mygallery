@@ -1,22 +1,38 @@
 .main{
-    width: 100%;
     margin-top: 2em;
-    &__image-container{
-        width: 80%;
-        margin: 0 auto;
-        padding: 1em 0;
-        &__photo{
-            width: 100%;
-            height: auto;
+    &__columns-container{
+        &__column{
+            &__image-container{
+                width: 80%;
+                margin: 0 auto;
+                padding: .5em 0;
+                &__photo{
+                    width: 100%;
+                    height: auto;
+                }
+                &__buttons-container{
+                    background-color: white;
+                    margin-top: -.2em;
+                    padding: .5em;
+                    &__button{
+                        width: 30px;
+                        margin-right: 1em; 
+                        cursor: pointer;
+                    }
+                }
+            }
         }
-        &__buttons-container{
-            background-color: white;
-            margin-top: -.2em;
-            padding: .5em;
-            &__button{
-                width: 30px;
-                margin-right: 1em; 
-                cursor: pointer;
+    }
+    @media only screen and (min-width: 1000px) {
+        &__columns-container{
+            display: flex;
+            width: 90%;
+            margin: 0 auto;
+            &__column{
+                width: 33.33%;
+                &__image-container{
+                    width: 98%;
+                }
             }
         }
     }

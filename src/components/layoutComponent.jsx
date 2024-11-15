@@ -1,51 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import logo from "../assets/logoTexto.png";
-import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
+import React, { useState, useEffect } from "react"
+import { Outlet, useNavigate, useLocation } from "react-router-dom"
+import logo from "../assets/logoTexto.png"
+import TextField from "@mui/material/TextField"
+import InputLabel from "@mui/material/InputLabel"
+import Select from "@mui/material/Select"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
 
 export const LayoutComponent = () => {
-    const [filter, setFilter] = useState("");
-    const [showMenu, setShowMenu] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(true);
-    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1000);
-    const navigate = useNavigate();
-    const location = useLocation();
-    const isSearchPage = location.pathname === "/";
-    const search = ["Find the perfect photo for your project", "Free stock photos"];
-    const myPhotos = ["Manage your favorite photos", "Saved photos"];
+    const [filter, setFilter] = useState("")
+    const [showMenu, setShowMenu] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(true)
+    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 1000)
+    const navigate = useNavigate()
+    const location = useLocation()
+    const isSearchPage = location.pathname === "/"
+    const search = ["Find the perfect photo for your project", "Free stock photos"]
+    const myPhotos = ["Manage your favorite photos", "Saved photos"]
 
     const handleChange = (event) => {
-        setFilter(event.target.value);
-    };
+        setFilter(event.target.value)
+    }
 
     const showMenuHandler = () => {
-        setShowMenu(true);
-        setShowDropdown(false);
-    };
+        setShowMenu(true)
+        setShowDropdown(false)
+    }
 
     const hideMenuHandler = () => {
-        setShowMenu(false);
-        setShowDropdown(true);
-    };
+        setShowMenu(false)
+        setShowDropdown(true)
+    }
 
     const handleNavigation = (path) => {
-        navigate(path);
-    };
+        navigate(path)
+    }
 
     useEffect(() => {
         const handleResize = () => {
-        setIsLargeScreen(window.innerWidth > 1000);
-        };
+            setIsLargeScreen(window.innerWidth > 1000)
+        }
 
-        window.addEventListener("resize", handleResize);
+        window.addEventListener("resize", handleResize)
         return () => {
-        window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+            window.removeEventListener("resize", handleResize)
+        }
+    }, [])
 
     return (
         <>
@@ -89,5 +89,5 @@ export const LayoutComponent = () => {
                 <h4 className="footer__text">© 2024 MyGallery, All Rights Reserved</h4>
             </footer>
         </>
-    );
-};
+    )
+}

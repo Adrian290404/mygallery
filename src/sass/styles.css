@@ -146,27 +146,39 @@ html, body {
 }
 
 .main {
-  width: 100%;
   margin-top: 2em;
 }
-.main__image-container {
+.main__columns-container__column__image-container {
   width: 80%;
   margin: 0 auto;
-  padding: 1em 0;
+  padding: 0.5em 0;
 }
-.main__image-container__photo {
+.main__columns-container__column__image-container__photo {
   width: 100%;
   height: auto;
 }
-.main__image-container__buttons-container {
+.main__columns-container__column__image-container__buttons-container {
   background-color: white;
   margin-top: -0.2em;
   padding: 0.5em;
 }
-.main__image-container__buttons-container__button {
+.main__columns-container__column__image-container__buttons-container__button {
   width: 30px;
   margin-right: 1em;
   cursor: pointer;
+}
+@media only screen and (min-width: 1000px) {
+  .main__columns-container {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .main__columns-container__column {
+    width: 33.33%;
+  }
+  .main__columns-container__column__image-container {
+    width: 98%;
+  }
 }
 
 .modal {
