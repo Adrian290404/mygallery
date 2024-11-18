@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import blackHeart from "../assets/blackHeart.png"
 import redHeart from "../assets/redHeart.png"
 import info from "../assets/info.png"
@@ -6,54 +7,57 @@ import trash from "../assets/trash.png"
 import edit from "../assets/edit.png"
 import download from "../assets/download.png"
 import { Modal } from "./modalComponent"
+import { addFavorite, removeFavorite, editPhoto } from "../redux/favoritesSlice"
+import FileSaver from "file-saver";
 
 export const PhotoComponent = ({ height, width, likes, id, publishDate, imageURL, description }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isFavorite, setIsFavorite] = useState(false)
-    const [favorites, setFavorites] = useState([])
-    const isSearchPage = location.pathname === "/"
+    const [currentDescription, setCurrentDescription] = useState(description)
+    const dispatch = useDispatch()
+    const favorites = useSelector(state => state.favorite.data)
+    const isSearchPage = window.location.pathname === "/"
 
     useEffect(() => {
-        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || []
-        setFavorites(savedFavorites)
-        const isFavoritePhoto = savedFavorites.some(photo => photo.id === id)
+        const isFavoritePhoto = favorites.some(photo => photo.id === id)
         setIsFavorite(isFavoritePhoto)
-    }, [id]);
+    }, [favorites, id])
 
     const infoHandler = () => {
         setIsModalOpen(true)
-    };
+    }
 
     const closeModalHandler = () => {
         setIsModalOpen(false)
-    };
+    }
 
     const toggleFavorite = () => {
         const photoInfo = { width, height, likes, id, publishDate, imageURL, description }
 
-        setFavorites(prevFavorites => {
-            let updatedFavorites
-            if (isFavorite) {
-                updatedFavorites = prevFavorites.filter(photo => photo.id !== id)
-            } 
-            else {
-                updatedFavorites = [...prevFavorites, photoInfo]
-            }
-            localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
-            return updatedFavorites
-        })
+        if (isFavorite) {
+            dispatch(removeFavorite(id))
+        } else {
+            dispatch(addFavorite(photoInfo))
+        }
 
         setIsFavorite(prevState => !prevState)
-    };
+    }
 
     const editHandler = () => {
         setIsModalOpen(true)
-    };
+    }
+
+    const saveDescription = (newDescription) => {
+        setCurrentDescription(newDescription)
+        dispatch(editPhoto({ id, description: newDescription }))
+    }
 
     const deleteHandler = () => {
-        const updatedFavorites = favorites.filter(photo => photo.id !== id)
-        localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
-        setFavorites(updatedFavorites)
+        dispatch(removeFavorite(id))
+    }
+
+    const downloadHandler = () => {
+        FileSaver.saveAs(imageURL, id + ".jpg")
     }
 
     const isPhotoInFavorites = favorites.some(photo => photo.id === id)
@@ -64,7 +68,7 @@ export const PhotoComponent = ({ height, width, likes, id, publishDate, imageURL
 
     return (
         <>
-            <img className="main__columns-container__column__image-container__photo" src={imageURL} alt={description} />
+            <img className="main__columns-container__column__image-container__photo" src={imageURL} alt={currentDescription} />
             <div className="main__columns-container__column__image-container__buttons-container">
                 {isSearchPage ? (
                     <>
@@ -99,6 +103,7 @@ export const PhotoComponent = ({ height, width, likes, id, publishDate, imageURL
                             className="main__columns-container__column__image-container__buttons-container__button"
                             src={download}
                             alt="Download"
+                            onClick={downloadHandler}
                         />
                     </>
                 )}
@@ -124,8 +129,9 @@ export const PhotoComponent = ({ height, width, likes, id, publishDate, imageURL
                 ) : (
                     <Modal
                         type="edit"
-                        text={description}
+                        text={currentDescription}
                         onClose={closeModalHandler}
+                        onSave={saveDescription}
                     />
                 )
             )}
