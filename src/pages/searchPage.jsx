@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getSearchThunk } from "../features/searchThunk"
 import { useState, useEffect } from "react"
 import { searchData, searchStatus } from "../features/searchSlice"
+import { useOutletContext } from "react-router-dom"
 
 export const SearchPage = () => {
     const dispatch = useDispatch()
@@ -10,6 +11,7 @@ export const SearchPage = () => {
     const photoStatus = useSelector(searchStatus)
     const [isLoading, setIsLoading] = useState(false)
     const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1000)
+    const { filter } = useOutletContext()
 
     useEffect(() => {
         const handleResize = () => {
@@ -42,9 +44,24 @@ export const SearchPage = () => {
         }
     }, [photoStatus])
 
-    const [column1, column2, column3] = isWideScreen ? [[], [], []] : [photoData, [], []]
+    const sortedPhotos = [...photoData].sort((a, b) => {
+        switch (filter) {
+            case "width":
+                return b.width - a.width
+            case "height":
+                return b.height - a.height
+            case "created_at":
+                return new Date(b.created_at) - new Date(a.created_at)
+            case "likes":
+                return b.likes - a.likes
+            default:
+                return 0
+        }
+    })
+
+    const [column1, column2, column3] = isWideScreen ? [[], [], []] : [sortedPhotos, [], []]
     if (isWideScreen) {
-        photoData.forEach((photo, index) => {
+        sortedPhotos.forEach((photo, index) => {
             if (index % 3 === 0) {
                 column1.push(photo)
             } else if (index % 3 === 1) {

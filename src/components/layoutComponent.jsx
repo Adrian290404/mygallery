@@ -122,7 +122,7 @@ export const LayoutComponent = () => {
             </header>
 
             <main className="main">
-                <Outlet />
+                <Outlet context={{ filter }} />
             </main>
 
             <footer className="footer">

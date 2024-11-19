@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useOutletContext } from "react-router-dom"
 import { PhotoComponent } from "../components/photoComponent"
 
 export const MyPhotosPage = () => {
     const [favorites, setFavorites] = useState([])
     const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1000)
     const location = useLocation()
+    const { filter } = useOutletContext()
     const filteredFavorites = location.state?.filteredFavorites || []
 
     useEffect(() => {
-        if (filteredFavorites.length === 0 && filteredFavorites === ""){
+        if (filteredFavorites.length === 0) {
             const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || []
             setFavorites(savedFavorites)
-        } 
-        else {
+        } else {
             setFavorites(filteredFavorites)
         }
 
@@ -24,11 +24,26 @@ export const MyPhotosPage = () => {
         return () => {
             window.removeEventListener("resize", handleResize)
         }
-    }, [filteredFavorites.length])
+    }, [filteredFavorites])
 
-    const [column1, column2, column3] = isWideScreen ? [[], [], []] : [favorites, [], []]
+    const sortedFavorites = [...favorites].sort((a, b) => {
+        switch (filter) {
+            case "width":
+                return b.width - a.width
+            case "height":
+                return b.height - a.height
+            case "created_at":
+                return new Date(b.publishDate) - new Date(a.publishDate)
+            case "likes":
+                return b.likes - a.likes
+            default:
+                return 0
+        }
+    })
+
+    const [column1, column2, column3] = isWideScreen ? [[], [], []] : [sortedFavorites, [], []]
     if (isWideScreen) {
-        favorites.forEach((photo, index) => {
+        sortedFavorites.forEach((photo, index) => {
             if (index % 3 === 0) {
                 column1.push(photo)
             } else if (index % 3 === 1) {
@@ -41,7 +56,7 @@ export const MyPhotosPage = () => {
 
     return (
         <>
-            {favorites.length > 0 && (
+            {sortedFavorites.length > 0 && (
                 <div className="main__columns-container">
                     <div className="main__columns-container__column">
                         {column1.map((photo) => (
@@ -95,5 +110,5 @@ export const MyPhotosPage = () => {
                 </div>
             )}
         </>
-    )    
+    )
 }
