@@ -7,7 +7,9 @@ import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import { useDispatch } from "react-redux"
-import { getSearchThunk } from "../redux/searchThunk"
+import { getSearchThunk } from "../features/searchThunk"
+import { useSelector } from "react-redux"
+import { favoriteList } from "../features/favoritesSlice"
 
 export const LayoutComponent = () => {
     const [filter, setFilter] = useState("")
@@ -21,6 +23,7 @@ export const LayoutComponent = () => {
     const dispatch = useDispatch()
     const search = ["Find the perfect photo for your project", "Free stock photos",]
     const myPhotos = ["Manage your favorite photos", "Saved photos"]
+    const favorites = useSelector(favoriteList)
 
     const handleChange = (event) => {
         setFilter(event.target.value)
@@ -31,7 +34,15 @@ export const LayoutComponent = () => {
     }
 
     const handleSearch = () => {
-        dispatch(getSearchThunk(searchTerm))
+        if (isSearchPage) {
+            dispatch(getSearchThunk(searchTerm))
+        } else {
+            const filteredFavorites = favorites.filter(photo =>
+                photo.description?.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            console.log(filteredFavorites)
+            navigate('/my-photos', { state: { filteredFavorites } })
+        }
     }
 
     const showMenuHandler = () => {
@@ -111,7 +122,7 @@ export const LayoutComponent = () => {
             </header>
 
             <main className="main">
-                <Outlet context={{ filter }} />
+                <Outlet />
             </main>
 
             <footer className="footer">

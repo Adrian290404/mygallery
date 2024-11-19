@@ -1,8 +1,8 @@
 import { PhotoComponent } from "../components/photoComponent"
 import { useSelector, useDispatch } from "react-redux"
-import { getSearchThunk } from "../redux/searchThunk"
+import { getSearchThunk } from "../features/searchThunk"
 import { useState, useEffect } from "react"
-import { searchData, searchStatus } from "../redux/searchSlice"
+import { searchData, searchStatus } from "../features/searchSlice"
 
 export const SearchPage = () => {
     const dispatch = useDispatch()
@@ -52,7 +52,7 @@ export const SearchPage = () => {
             } else {
                 column3.push(photo)
             }
-        });
+        })
     }
 
     return (

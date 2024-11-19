@@ -1,23 +1,30 @@
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { PhotoComponent } from "../components/photoComponent"
 
 export const MyPhotosPage = () => {
     const [favorites, setFavorites] = useState([])
     const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1000)
+    const location = useLocation()
+    const filteredFavorites = location.state?.filteredFavorites || []
 
     useEffect(() => {
-        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || []
-        setFavorites(savedFavorites)
+        if (filteredFavorites.length === 0 && filteredFavorites === ""){
+            const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || []
+            setFavorites(savedFavorites)
+        } 
+        else {
+            setFavorites(filteredFavorites)
+        }
 
         const handleResize = () => {
             setIsWideScreen(window.innerWidth > 1000)
-        };
-
+        }
         window.addEventListener("resize", handleResize)
         return () => {
             window.removeEventListener("resize", handleResize)
         }
-    }, [])
+    }, [filteredFavorites.length])
 
     const [column1, column2, column3] = isWideScreen ? [[], [], []] : [favorites, [], []]
     if (isWideScreen) {
@@ -88,5 +95,5 @@ export const MyPhotosPage = () => {
                 </div>
             )}
         </>
-    )
+    )    
 }

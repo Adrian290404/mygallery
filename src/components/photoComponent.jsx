@@ -7,7 +7,7 @@ import trash from "../assets/trash.png"
 import edit from "../assets/edit.png"
 import download from "../assets/download.png"
 import { Modal } from "./modalComponent"
-import { addFavorite, removeFavorite, editPhoto } from "../redux/favoritesSlice"
+import { addFavorite, removeFavorite, editPhoto } from "../features/favoritesSlice"
 import FileSaver from "file-saver";
 
 export const PhotoComponent = ({ height, width, likes, id, publishDate, imageURL, description }) => {
@@ -110,10 +110,10 @@ export const PhotoComponent = ({ height, width, likes, id, publishDate, imageURL
             </div>
 
             {isModalOpen && (
-                isSearchPage ? (
-                    <Modal
-                        type="information"
-                        text={
+                <Modal
+                    type={isSearchPage ? "information" : "edit"}
+                    text={
+                        isSearchPage ? (
                             <>
                                 <b>Width:</b> {width} px.
                                 <br />
@@ -123,17 +123,13 @@ export const PhotoComponent = ({ height, width, likes, id, publishDate, imageURL
                                 <br />
                                 <b>Date:</b> {new Date(publishDate).toLocaleDateString()}.
                             </>
-                        }
-                        onClose={closeModalHandler}
-                    />
-                ) : (
-                    <Modal
-                        type="edit"
-                        text={currentDescription}
-                        onClose={closeModalHandler}
-                        onSave={saveDescription}
-                    />
-                )
+                        ) : (
+                            currentDescription
+                        )
+                    }
+                    onClose={closeModalHandler}
+                    {...(!isSearchPage && { onSave: saveDescription })}
+                />
             )}
         </>
     )
