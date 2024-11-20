@@ -11,12 +11,11 @@ export const MyPhotosPage = () => {
 
     useEffect(() => {
         if (filteredFavorites.length === 0) {
-            const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || []
-            setFavorites(savedFavorites)
+            setFavorites([])
         } else {
             setFavorites(filteredFavorites)
         }
-
+    
         const handleResize = () => {
             setIsWideScreen(window.innerWidth > 1000)
         }

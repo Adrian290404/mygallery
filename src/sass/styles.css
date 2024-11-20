@@ -148,6 +148,10 @@ html, body {
 .main {
   margin-top: 2em;
 }
+.main__charge-image {
+  display: block;
+  margin: 2em auto;
+}
 .main__columns-container__column__image-container {
   width: 80%;
   margin: 0 auto;

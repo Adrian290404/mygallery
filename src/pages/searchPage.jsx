@@ -4,6 +4,7 @@ import { getSearchThunk } from "../features/searchThunk"
 import { useState, useEffect } from "react"
 import { searchData, searchStatus } from "../features/searchSlice"
 import { useOutletContext } from "react-router-dom"
+import charge from "../assets/charge.png"
 
 export const SearchPage = () => {
     const dispatch = useDispatch()
@@ -27,9 +28,9 @@ export const SearchPage = () => {
 
     useEffect(() => {
         if (photoStatus === "idle") {
-            dispatch(getSearchThunk())
+            dispatch(getSearchThunk());
         }
-    }, [dispatch, photoStatus])
+    }, [dispatch, photoStatus, filter]);
 
     useEffect(() => {
         switch (photoStatus) {
@@ -73,60 +74,64 @@ export const SearchPage = () => {
     }
 
     return (
-        <>
-            {!isLoading && (
-                <div className="main__columns-container">
-                    <div className="main__columns-container__column">
-                        {column1.map((photo) => (
-                            <section className="main__columns-container__column__image-container" key={photo.id}>
-                                <PhotoComponent
-                                    height={photo.height}
-                                    width={photo.width}
-                                    id={photo.id}
-                                    likes={photo.likes}
-                                    publishDate={photo.created_at}
-                                    imageURL={photo.urls.regular}
-                                    description={photo.description}
-                                />
-                            </section>
-                        ))}
-                    </div>
-                    {isWideScreen && (
-                        <>
-                            <div className="main__columns-container__column">
-                                {column2.map((photo) => (
-                                    <section className="main__columns-container__column__image-container" key={photo.id}>
-                                        <PhotoComponent
-                                            height={photo.height}
-                                            width={photo.width}
-                                            id={photo.id}
-                                            likes={photo.likes}
-                                            publishDate={photo.created_at}
-                                            imageURL={photo.urls.regular}
-                                            description={photo.description}
-                                        />
-                                    </section>
-                                ))}
-                            </div>
-                            <div className="main__columns-container__column">
-                                {column3.map((photo) => (
-                                    <section className="main__columns-container__column__image-container" key={photo.id}>
-                                        <PhotoComponent
-                                            height={photo.height}
-                                            width={photo.width}
-                                            id={photo.id}
-                                            likes={photo.likes}
-                                            publishDate={photo.created_at}
-                                            imageURL={photo.urls.regular}
-                                            description={photo.description}
-                                        />
-                                    </section>
-                                ))}
-                            </div>
-                        </>
-                    )}
+    <>
+        {isLoading ? (
+            <div className="loading-message">
+                <img className="main__charge-image" src={charge} />
+            </div>
+        ) : (
+            <div className="main__columns-container">
+                <div className="main__columns-container__column">
+                    {column1.map((photo) => (
+                        <section className="main__columns-container__column__image-container" key={photo.id}>
+                            <PhotoComponent
+                                height={photo.height}
+                                width={photo.width}
+                                id={photo.id}
+                                likes={photo.likes}
+                                publishDate={photo.created_at}
+                                imageURL={photo.urls.regular}
+                                description={photo.description}
+                            />
+                        </section>
+                    ))}
                 </div>
-            )}
-        </>
+                {isWideScreen && (
+                    <>
+                        <div className="main__columns-container__column">
+                            {column2.map((photo) => (
+                                <section className="main__columns-container__column__image-container" key={photo.id}>
+                                    <PhotoComponent
+                                        height={photo.height}
+                                        width={photo.width}
+                                        id={photo.id}
+                                        likes={photo.likes}
+                                        publishDate={photo.created_at}
+                                        imageURL={photo.urls.regular}
+                                        description={photo.description}
+                                    />
+                                </section>
+                            ))}
+                        </div>
+                        <div className="main__columns-container__column">
+                            {column3.map((photo) => (
+                                <section className="main__columns-container__column__image-container" key={photo.id}>
+                                    <PhotoComponent
+                                        height={photo.height}
+                                        width={photo.width}
+                                        id={photo.id}
+                                        likes={photo.likes}
+                                        publishDate={photo.created_at}
+                                        imageURL={photo.urls.regular}
+                                        description={photo.description}
+                                    />
+                                </section>
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
+        )}
+    </>
     )
 }

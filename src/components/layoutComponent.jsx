@@ -21,7 +21,7 @@ export const LayoutComponent = () => {
     const location = useLocation()
     const isSearchPage = location.pathname === "/"
     const dispatch = useDispatch()
-    const search = ["Find the perfect photo for your project", "Free stock photos",]
+    const search = ["Find the perfect photo for your project", "Free stock photos"]
     const myPhotos = ["Manage your favorite photos", "Saved photos"]
     const favorites = useSelector(favoriteList)
 
@@ -31,16 +31,18 @@ export const LayoutComponent = () => {
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value)
-    }
 
-    const handleSearch = () => {
         if (isSearchPage) {
-            dispatch(getSearchThunk(searchTerm))
+            dispatch(getSearchThunk(event.target.value))
         } else {
-            const filteredFavorites = favorites.filter(photo =>
-                photo.description?.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-            console.log(filteredFavorites)
+            let filteredFavorites = []
+            if (!event.target.value.trim()) {
+                filteredFavorites = favorites
+            } else {
+                filteredFavorites = favorites.filter(photo =>
+                    photo.description?.toLowerCase().includes(event.target.value.toLowerCase())
+                )
+            }
             navigate('/my-photos', { state: { filteredFavorites } })
         }
     }
@@ -94,7 +96,6 @@ export const LayoutComponent = () => {
                         variant="filled"
                         value={searchTerm}
                         onChange={handleSearchChange}
-                        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                     />
                     <FormControl
                         className="header__search-container__select"
