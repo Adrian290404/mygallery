@@ -6,6 +6,7 @@ import InputLabel from "@mui/material/InputLabel"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
+import Button from "@mui/material/Button"
 import { useDispatch } from "react-redux"
 import { getSearchThunk } from "../features/searchThunk"
 import { useSelector } from "react-redux"
@@ -27,20 +28,24 @@ export const LayoutComponent = () => {
 
     const handleChange = (event) => {
         setFilter(event.target.value)
+        document.getElementById("demo-simple-select-filled").style.backgroundColor = "#E8F0FE";
     }
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value)
+    }
 
+    const handleSearch = () => {
         if (isSearchPage) {
-            dispatch(getSearchThunk(event.target.value))
+            dispatch(getSearchThunk(searchTerm))
         } else {
             let filteredFavorites = []
-            if (!event.target.value.trim()) {
+            if (!searchTerm.trim()) {
                 filteredFavorites = favorites
-            } else {
+            } 
+            else {
                 filteredFavorites = favorites.filter(photo =>
-                    photo.description?.toLowerCase().includes(event.target.value.toLowerCase())
+                    photo.description?.toLowerCase().includes(searchTerm.toLowerCase())
                 )
             }
             navigate('/my-photos', { state: { filteredFavorites } })
@@ -89,14 +94,24 @@ export const LayoutComponent = () => {
                 </nav>
                 <section className="header__search-container">
                     <h2 className="header__search-container__title">{isSearchPage ? search[0] : myPhotos[0]}</h2>
-                    <TextField
-                        className="header__search-container__textfield"
-                        id="filled-basic"
-                        label="Search photos"
-                        variant="filled"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                    />
+                    <div className="header__search-container__search">
+                        <TextField
+                            className="header__search-container__search__textfield"
+                            id="filled-basic"
+                            label="Search photos"
+                            variant="filled"
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                        />
+                        <Button 
+                            className="header__search-container__search__button" 
+                            variant="contained" 
+                            onClick={handleSearch} 
+                            sx={{ ml: 2 }}
+                        >
+                            Search
+                        </Button>
+                    </div>
                     <FormControl
                         className="header__search-container__select"
                         variant="filled"

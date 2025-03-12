@@ -47,13 +47,28 @@
             margin: 1.5em auto;
             margin-bottom: .8em;
         }
-        &__textfield{
-            background-color: #E3E3E3;
-            width: 70%;
+        &__search{
+            display: flex;
+            width: 90%;
+            justify-content: center;
+            &__textfield{
+                background-color: #E3E3E3;
+                width: 80%;
+            }
+            &__button{
+                background-color: #1763A0;
+                color: white;
+                border: none;
+                cursor: pointer;
+                padding: 0.5em 1em;
+                font-weight: 500;
+                font-size: 1.1rem;
+                width: 20%;
+            }
         }
         &__select{
             background-color: #E3E3E3;
-            width: 70%;
+            width: 90%;
         }
         &__subtitle{
             font-size: 1.125rem;
@@ -79,8 +94,14 @@
             &__title{
                 font-size: 2rem;
             }
-            &__textfield{
+            &__search{
                 width: 60%;
+                &__textfield{
+                    width: 90%;
+                }
+                &__button{
+                    width: 10%;
+                }
             }
             &__select{
                 width: 60%;

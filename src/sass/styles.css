@@ -67,13 +67,28 @@ html, body {
   margin: 1.5em auto;
   margin-bottom: 0.8em;
 }
-.header__search-container__textfield {
+.header__search-container__search {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+}
+.header__search-container__search__textfield {
   background-color: #E3E3E3;
-  width: 70%;
+  width: 80%;
+}
+.header__search-container__search__button {
+  background-color: #1763A0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  font-weight: 500;
+  font-size: 1.1rem;
+  width: 20%;
 }
 .header__search-container__select {
   background-color: #E3E3E3;
-  width: 70%;
+  width: 90%;
 }
 .header__search-container__subtitle {
   font-size: 1.125rem;
@@ -97,8 +112,14 @@ html, body {
   .header__search-container__title {
     font-size: 2rem;
   }
-  .header__search-container__textfield {
+  .header__search-container__search {
     width: 60%;
+  }
+  .header__search-container__search__textfield {
+    width: 90%;
+  }
+  .header__search-container__search__button {
+    width: 10%;
   }
   .header__search-container__select {
     width: 60%;
