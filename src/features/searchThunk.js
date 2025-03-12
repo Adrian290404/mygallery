@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-const token = 'aKqASnFPEt4cCcOuxBGhVjmFAlGlEaDwiU_NqayRc04'
 const URLstart = 'https://api.unsplash.com/'
 
 export const getSearchThunk = createAsyncThunk('getSearchData', async (params = "") =>{
@@ -16,7 +15,7 @@ export const getSearchThunk = createAsyncThunk('getSearchData', async (params = 
         const response = await fetch(realURL, {
             method: 'GET',
             headers: {
-                'Authorization': `Client-ID ${token}`
+                'Authorization': `Client-ID ${import.meta.env.VITE_API_TOKEN}`
             }
         });
         if(response.ok){

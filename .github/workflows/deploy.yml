@@ -1,0 +1,55 @@
+name: Despliegue de Aplicación React a S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Compilar la aplicación
+        env:
+          VITE_API_TOKEN: ${{ secrets.VITE_API_TOKEN }}
+        run: npm run build
+
+      - name: Sincronizar archivos con S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SOURCE_DIR: './dist'
+
+      - name: Eliminar versiones antiguas en S3
+        run: |
+          versions=$(aws s3api list-object-versions --bucket ${{ secrets.AWS_S3_BUCKET }} \
+            --query 'Versions[?IsLatest==`false`].[Key,VersionId]' --output text)
+          if [ -n "$versions" ]; then
+            echo "$versions" | while read key version; do
+              echo "Eliminando $key (versión $version)"
+              aws s3api delete-object --bucket ${{ secrets.AWS_S3_BUCKET }} --key "$key" --version-id "$version"
+            done
+          else
+            echo "No hay versiones antiguas para eliminar."
+          fi
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
